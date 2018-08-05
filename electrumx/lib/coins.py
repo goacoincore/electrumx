@@ -2086,3 +2086,32 @@ class GroestlcoinTestnet(Groestlcoin):
         '7frvhgofuf522b5i.onion t',
         'aocojvqcybdoxekv.onion t',
     ]
+
+class GoaCoin(Coin):
+        NAME = "GoaCoin"
+        SHORTNAME = "GOA"
+        NET = "mainnet"
+        XPUB_VERBYTES = bytes.fromhex("0488B21E")
+        XPRV_VERBYTES = bytes.fromhex("0488ADE4")
+        GENESIS_HASH = ('000003188d3d8c8416f376ac5d2076bb'
+                        '19edfee547e3d2751ae8069d147ddd3d')
+        P2PKH_VERBYTE = bytes.fromhex("26")
+        P2SH_VERBYTES = [bytes.fromhex("0A")]
+        WIF_BYTE = bytes.fromhex("C6")
+        TX_COUNT_HEIGHT = 115890
+        TX_COUNT = 245030
+        TX_PER_BLOCK = 4
+        RPC_PORT = 12454
+        PEERS = [
+            'electrum1.goaco.in',
+            'electrum2.goaco.in'
+        ]
+        SESSIONCLS = DashElectrumX
+        DAEMON = daemon.DashDaemon
+
+        @classmethod
+        def header_hash(cls, header):
+            '''Given a header return the hash.'''
+            import neoscrypt
+            return neoscrypt.getPoWHash(header)
+
